@@ -1,0 +1,89 @@
+/* General */
+body {
+    font-family: 'Times New Roman', sans-serif;
+    background-color: #f7f3f0; /* Color de fondo cálido */
+    margin: 0;
+    padding: 0;
+}
+
+/* Jumbotron */
+.jumbotron {
+    background-color: #8b5e3c; /* Marrón cálido */
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.jumbotron h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.jumbotron p {
+    font-size: 1.2rem;
+}
+
+/* Contenedor */
+.container {
+    margin-top: 20px;
+}
+
+/* Formulario */
+.form-group label {
+    font-weight: bold;
+    color: #8b5e3c;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus {
+    border-color: #8b5e3c;
+    box-shadow: 0 0 8px rgba(139, 94, 60, 0.8);
+}
+
+/* Botón */
+.btn {
+    background-color: #8b5e3c;
+    border: none;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #6d452e;
+}
+
+/* Tabla */
+.table {
+    margin-top: 20px;
+    background-color: white;
+}
+
+.table th {
+    background-color: #8b5e3c;
+    color: white;
+    text-align: center;
+}
+
+.table td {
+    text-align: center;
+}
+
+/* Sombra general */
+.sombra {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Texto del precio */
+#precio {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #8b5e3c;
+    margin-top: 20px;
+}
