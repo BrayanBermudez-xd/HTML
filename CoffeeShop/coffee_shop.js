@@ -1,3 +1,4 @@
+
 var cliente = 0;
 
 function calcularPrecio() {
