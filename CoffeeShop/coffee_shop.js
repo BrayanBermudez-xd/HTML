@@ -1,5 +1,4 @@
-
-var cliente = 0;
+let cliente = 0;
 
 function calcularPrecio() {
     var drink = document.getElementById("drink").value;
@@ -31,61 +30,59 @@ function calcularPrecio() {
     cliente++;
     agregaRenglon(cliente, price);
     limpiaElementos();
+
+    // Enviar el pedido al servidor backend
+    enviarPedido(nombre, drink, ounce, shots, price);
 }
 
-function cambiaEstatus(id) {
-    var botonEstatus = document.getElementById(id);
-    var identregado = "entregado" + id.substr(7);
-    var botonEntregado = document.getElementById(identregado);
+// Función para enviar el pedido al backend (MongoDB)
+function enviarPedido(nombre, drink, ounce, shots, price) {
+    const pedido = {
+        nombre: nombre,
+        drink: drink,
+        ounce: ounce,
+        shots: shots,
+        precio: price
+    };
 
-    if (botonEstatus.classList.contains("btn-primary")) {
-        botonEstatus.className = "btn btn-success";
-        botonEstatus.innerHTML = "Listo!";
-        botonEntregado.className = "btn btn-primary";
-        botonEntregado.innerHTML = "<span class='spinner-border spinner-border-sm'></span> En espera de entrega";
-    }
+    fetch('http://localhost:5000/api/pedidos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pedido)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Pedido guardado:', data);
+        agregarPedidoATabla(data); // Agregar pedido a la tabla
+    })
+    .catch(error => {
+        console.error('Error al enviar el pedido:', error);
+    });
 }
 
-function cambiaEntrega(id) {
-    var botonEntrega = document.getElementById(id);
-
-    if (botonEntrega.classList.contains("btn-primary")) {
-        botonEntrega.className = "btn btn-success";
-        botonEntrega.innerHTML = "Entregado!";
-    }
+// Función para agregar pedido a la tabla
+function agregarPedidoATabla(pedido) {
+    const tableRef = document.getElementById("tabla");
+    const newRow = tableRef.insertRow(-1);
+    
+    newRow.innerHTML = `
+        <td>${pedido._id}</td>
+        <td>${pedido.nombre}</td>
+        <td>${pedido.drink}</td>
+        <td>${pedido.ounce}</td>
+        <td>${pedido.shots}</td>
+        <td>$${pedido.precio.toFixed(2)}</td>
+        <td><button class="btn btn-primary">En preparación</button></td>
+        <td><button class="btn btn-warning">Pendiente</button></td>
+    `;
 }
 
+// Función para limpiar los elementos del formulario
 function limpiaElementos() {
     document.getElementById("drink").value = "";
     document.getElementById("ounce").value = "";
     document.getElementById("shots").value = 1;
     document.getElementById("nombre").value = "";
-}
-
-function agregaRenglon(cliente, precio) {
-    var drink = document.getElementById("drink").value;
-    var ounce = document.getElementById("ounce").value;
-    var shots = document.getElementById("shots").value;
-    var nombre = document.getElementById("nombre").value;
-
-    var tableRef = document.getElementById("tabla");
-    var newRow = tableRef.insertRow(-1);
-
-    var columnas = [
-        cliente,
-        nombre,
-        drink,
-        ounce,
-        shots,
-        `$${precio.toFixed(2)}`,
-        `<button type='button' id='estatus${cliente}' class='btn btn-primary' onclick='cambiaEstatus(this.id)'>
-            <span class='spinner-border spinner-border-sm'></span> En preparación
-         </button>`,
-        `<button type='button' id='entregado${cliente}' class='btn btn-warning disabled' onclick='cambiaEntrega(this.id)'>Pendiente</button>`
-    ];
-
-    columnas.forEach((contenido) => {
-        var newCell = newRow.insertCell(-1);
-        newCell.innerHTML = contenido;
-    });
 }

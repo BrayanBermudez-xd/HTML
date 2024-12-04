@@ -51,7 +51,7 @@ body {
 .btn {
     background-color: #8b5e3c;
     border: none;
-    color: white;
+    color: rgb(255, 255, 255);
     transition: all 0.3s ease-in-out;
 }
 

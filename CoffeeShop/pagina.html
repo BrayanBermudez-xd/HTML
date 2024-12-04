@@ -1,24 +1,25 @@
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="estilopropio.css">
+  <link rel="stylesheet" href="Style.css">
   <title>Coffee Shop</title>
 </head>
-<link rel="stylesheet" href="Style.css">
 <body>
   <div class="container">
     <div class="jumbotron sombra">
       <h1>COFFEE SHOP</h1>
-      
       <p>Solicitud de bebidas</p>
       <p>Gracias por su preferencia</p>
     </div>
+
     <div class="form-group">
       <label for="nombre">Nombre del cliente:</label>
       <input type="text" name="nombre" id="nombre" class="form-control sombra">
     </div>
+
     <div class="form-group sombra">
       <label for="drink">Tipo de café:</label>
       <select name="drink" id="drink" class="form-control sombra">
@@ -29,6 +30,7 @@
         <option value="latte">Con Leche</option>
       </select>
     </div>
+
     <div class="form-group">
       <label for="ounce">Tamaño:</label>
       <select name="ounce" id="ounce" class="form-control">
@@ -38,14 +40,19 @@
         <option value="16">Grande</option>
       </select>
     </div>
+
     <div class="form-group">
       <label for="shots">Shots:</label>
       <input type="number" name="shots" id="shots" min="1" max="5" value="1" class="form-control">
     </div>
+
     <div class="form-group">
       <input type="button" value="Calcular" onclick="calcularPrecio()" class="btn btn-primary sombra">
+      <input type="button" value="Agregar pedido" oneclick= "agregarPedidoATabla()" class="btn btn primary sombra">
     </div>
-    <p id="precio">El precio final del café es:</p>
+
+    <!--<p id="precio">El precio final del café es:</p>-->
+
     <table id="tabla" class="table table-striped table-bordered table-hover">
       <tr>
         <th>Cliente</th>
@@ -60,7 +67,6 @@
     </table>
   </div>
 
-  <!-- Enlace al archivo JavaScript externo -->
   <script src="coffee_shop.js"></script>
 </body>
 </html>
